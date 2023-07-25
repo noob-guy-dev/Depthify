@@ -15,7 +15,7 @@ depth_photo = None
 
 def generate():
     global opened_image_path, depth_photo
-    
+
     if opened_image_path:
         model_type = style_dropdown.get()
 
@@ -25,7 +25,7 @@ def generate():
         midas.eval()
         midas_transforms = torch.hub.load("intel-isl/MiDaS", "transforms")
 
-        if model_type == "DPT_Large" or model_type == "DPT_Hybrid":
+        if model_type in ["DPT_Large", "DPT_Hybrid"]:
             transform = midas_transforms.dpt_transform
         else:
             transform = midas_transforms.small_transform
@@ -72,10 +72,11 @@ def generate():
 
 def open_image():
     global opened_image_path
-    file_path = filedialog.askopenfilename(filetypes=[("Image files", "*.png;*.jpg;*.jpeg;*.gif;*.bmp")])
-    if file_path:
+    if file_path := filedialog.askopenfilename(
+        filetypes=[("Image files", "*.png;*.jpg;*.jpeg;*.gif;*.bmp")]
+    ):
         img = Image.open(file_path)
-        
+
         # Calculate new width and height to maintain the aspect ratio
         original_width, original_height = img.size
         max_size = 512  # Set the maximum size for the width or height
@@ -87,12 +88,12 @@ def open_image():
         img = img.resize((new_width, new_height), Image.LANCZOS)
 
         photo = ImageTk.PhotoImage(img)
-        
+
         # Adjust canvas size to match image
         canvas.config(width=new_width, height=new_height)
         canvas.create_image(0, 0, anchor=tkinter.NW, image=photo)
         canvas.image = photo  # Keep a reference to avoid garbage collection issues
-        
+
         # Enable the canvas
         canvas.config(state=tkinter.NORMAL)
         opened_image_path = file_path
@@ -100,8 +101,9 @@ def open_image():
 def save_depthmap():
     global depth_photo
     if depth_photo:
-        save_path = filedialog.asksaveasfilename(defaultextension=".png", filetypes=[("PNG files", "*.png")])
-        if save_path:
+        if save_path := filedialog.asksaveasfilename(
+            defaultextension=".png", filetypes=[("PNG files", "*.png")]
+        ):
             # Convert depth_photo to PIL Image
             depth_img = ImageTk.getimage(depth_photo)
             depth_img.save(save_path)
