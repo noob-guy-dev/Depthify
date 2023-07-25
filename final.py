@@ -158,7 +158,7 @@ def destroy():
 
 
 root = ctk.CTk()
-root.title("MiDaS")
+root.title("Depthify")
 
 ctk.set_appearance_mode("dark")
 
