@@ -6,7 +6,7 @@ Depthify is an open-source project that utilizes the power of the MiDaS (Monocul
 
 ## Key Features
 
-- **MiDaS Model Integration:** Depthify leverages the state-of-the-art MiDaS model for real-time depth estimation, ensuring impressive accuracy and quality in the generated depth maps.
+- **MiDaS Model Integration:** Depthify leverages the state-of-the-art MiDaS model for depth estimation, ensuring impressive accuracy and quality in the generated depth maps.
 
 ## Getting Started
 
