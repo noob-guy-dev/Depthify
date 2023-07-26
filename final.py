@@ -144,7 +144,7 @@ def show_depthmap():
         original_canvas.image = original_photo
         
         # Create a label to separate the two canvas widgets
-        ctk.CTkLabel(frame, text="Depth Map").pack(side="left", padx=10, pady=10)
+        #ctk.CTkLabel(frame, text="Depth Map").pack(side="left", padx=10, pady=10)
         
         # Display the generated depth map
         depth_canvas = tkinter.Canvas(frame, bg="#1C1D1C", width=depth_width, height=depth_height)
